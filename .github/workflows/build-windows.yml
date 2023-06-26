@@ -27,7 +27,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        git clone git@git.ligo.org:colm.talbot/bilby-cython.git
+        git clone https://git.ligo.org/colm.talbot/bilby-cython.git
         python -m pip install --upgrade pip wheel setuptools setuptools_scm
         python -m pip install cython oldest-supported-numpy
         python -m pip install delvewheel
