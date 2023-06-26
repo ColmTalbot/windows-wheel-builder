@@ -17,7 +17,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, macos-latest]
         python-version: ["3.8", "3.9", "3.10", "3.11"]
 
     steps:
@@ -31,17 +30,13 @@ jobs:
         git clone git@git.ligo.org:colm.talbot/bilby-cython.git
         python -m pip install --upgrade pip wheel setuptools setuptools_scm
         python -m pip install cython oldest-supported-numpy
+        python -m pip install delvewheel
     - name: Build wheel
       run: |
         cd bilby-cython
-        for tag in $(git tag)
-        do
+        git tag | ForEach-Object {
             python -m pip wheel -v --wheel-dir=wheel --no-deps .
-        done
-    - name: Fix wheel (Windows)
-      if: matrix.os == 'windows-latest'
-      run: |
-        python -m pip install delvewheel
+        }
         Move-Item wheel wheelhouse
         cd wheelhouse
         Get-ChildItem -Path . | ForEach-Object {
