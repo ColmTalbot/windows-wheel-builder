@@ -33,20 +33,29 @@ jobs:
         python -m pip install delvewheel
     - name: Build wheel
       run: |
+        ls
         cd bilby-cython
+        ls
         git tag | ForEach-Object {
           git checkout $_
           python -m pip wheel -v --wheel-dir=wheel --no-deps .
         }
-        Move-Item wheel wheelhouse
+        ls
+        cd ..
+        ls
+        Move-Item bilby-cython\wheel wheelhouse
+        ls
         cd wheelhouse
+        ls
         Get-ChildItem -Path . | ForEach-Object {
           delvewheel repair -vv --wheel-dir . $_
           python -m pip install -v $_
           python -c "import bilby_cython; print(bilby_cython.__file__, bilby_cython.__version__)"
           python -c "import bilby_cython.geometry"
         }
+        ls
         cd ../
+        ls
     - uses: actions/upload-artifact@v3
       with:
         name: wheelhouse
