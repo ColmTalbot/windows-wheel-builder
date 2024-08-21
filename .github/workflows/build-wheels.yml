@@ -30,7 +30,7 @@ jobs:
       run: |
         git clone https://git.ligo.org/colm.talbot/bilby-cython.git
         python -m pip install --upgrade pip wheel setuptools setuptools_scm
-        python -m pip install cython oldest-supported-numpy
+        python -m pip install cython numpy
         python -m pip install delvewheel
     - name: Build wheel
       run: |
