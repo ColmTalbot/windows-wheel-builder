@@ -70,7 +70,7 @@ jobs:
       name: pypi
       url: https://pypi.org/p/bilby.cython
     permissions:
-      id-token: write  # IMPORTANT: this permission is mandatory for trusted publishing
+      id-token: write
 
     steps:
     - uses: actions/checkout@v3
@@ -96,9 +96,7 @@ jobs:
 #         repository_url: https://test.pypi.org/legacy/
 #         skip_existing: true
     - name: Publish package
-      if: github.event_name == 'push'
+      if: github.event_name == 'workflow_dispatch'
       uses: pypa/gh-action-pypi-publish@master
       with:
-        user: __token__
-        password: ${{ secrets.PYPI_API_TOKEN }}
         skip_existing: true
