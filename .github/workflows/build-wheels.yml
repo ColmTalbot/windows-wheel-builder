@@ -21,9 +21,9 @@ jobs:
         python-version: ["3.11", "3.12", "3.13", "3.14"]
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v6
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
@@ -57,7 +57,7 @@ jobs:
         ls
         cd ../
         ls
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v6
       with:
         name: wheelhouse
         path: wheelhouse
@@ -73,13 +73,13 @@ jobs:
       id-token: write
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
     - name: Set up Python
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v6
       with:
         python-version: '3.x'
     - name: Download artifact
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v7
       with:
         name: wheelhouse
         path: dist
