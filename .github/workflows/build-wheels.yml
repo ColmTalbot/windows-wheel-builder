@@ -59,7 +59,7 @@ jobs:
         ls
     - uses: actions/upload-artifact@v6
       with:
-        name: wheelhouse
+        name: wheelhouse-${{ matrix.python-version }}
         path: wheelhouse
 
   deploy:
@@ -81,8 +81,8 @@ jobs:
     - name: Download artifact
       uses: actions/download-artifact@v7
       with:
-        name: wheelhouse
         path: dist
+        merge-multiple: true
     - name: Gather artifacts
       run: |
         ls
